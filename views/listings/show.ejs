@@ -9,8 +9,8 @@
   <div class="card-body">
     <p class="card-text"><b> <%= mylist.title %></b>
    <br> <%=mylist.description %>
-    <br>&#8377;<%= mylist.price.toLocaleString("en-IN") %>
-    <br><%=mylist.location %>
+   
+<br>&#8377;<%= mylist.price ? Number(mylist.price).toLocaleString("en-IN") : "0" %>/night    <br><%=mylist.location %>
     <br><%=mylist.country %>
 </p>
 
