@@ -8,10 +8,10 @@ const engine = require('ejs-mate');
 const wrapAsyn = require("./utils/wrapAsync.js");
 const ExpressError= require("./utils/ExpressError.js");
 const Joi = require("joi");
-const {listingSchema} = require("./schema.js");
+const {listingSchema,reviewSchema} = require("./schema.js");
+const Review = require("./models/reviews.js");
 
-
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended : true }));
 app.use(express.json()); 
 
 app.set("view engine","ejs");
@@ -34,6 +34,16 @@ async function main() {
 
 const validateListing=(req,res,next)=>{
  let {error} = listingSchema.validate(req.body);
+if(error){
+   throw new ExpressError(400, error.details.map(el => el.message).join(', '));
+}
+
+else{
+  next();
+}
+}
+const validateReview=(req,res,next)=>{
+ let {error} = reviewSchema.validate( req.body);
 if(error){
    throw new ExpressError(400, error.details.map(el => el.message).join(', '));
 }
@@ -75,6 +85,27 @@ app.get("/listings/:id/edit",wrapAsyn(async(req,res)=>{
   
 })
 );
+//Review rout
+app.post("/listings/:id/reviews",validateReview , wrapAsyn(async(req,res)=>{
+let listing = await Listing.findById(req.params.id);
+let newreview = new Review(req.body.review);
+
+listing.reviews.push(newreview);
+await newreview.save();
+await listing.save();
+
+console.log("new review saved");
+res.redirect(`/listings/${listing._id}`);
+}));
+
+//Delete REview Route
+
+app.delete("/listings/:id/reviews/:reviewId",wrapAsyn(async(req,res)=>{
+  let {id,reviewId} = req.params;
+  await Listing.findByIdAndUpdate(id,{$pull : {reviews:reviewId}});
+  await Review.findByIdAndDelete(reviewId);
+  res.redirect(`/listings/${id}`);
+}));
 
 app.get("/listings/new",(req,res)=>{
   res.render("listings/new.ejs")
@@ -83,7 +114,7 @@ app.get("/listings/new",(req,res)=>{
 //show
 app.get("/listings/:id" ,wrapAsyn(async(req,res)=>{
 let {id}  =req.params;
-let mylist = await Listing.findById(id);
+let mylist = await Listing.findById(id).populate("reviews");
 res.render("listings/show.ejs",{mylist});
 }));
 app.get("/listings",wrapAsyn(async(req,res)=>{
