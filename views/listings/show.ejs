@@ -7,10 +7,11 @@
   <img src="<%= mylist.image ? mylist.image.url : '' %>" class="card-img-top show-img" alt="..." >
 
   <div class="card-body">
-    <p class="card-text"><%=mylist.description %>
+    <p class="card-text"> Owner:<%= mylist.owner.username %> </p>
+    <p class="card-text"> <%=mylist.description%> </p>
    
-<br>&#8377;<%= mylist.price ? Number(mylist.price).toLocaleString("en-IN") : "0" %>/night    <br><%=mylist.location %>
-    <br><%=mylist.country %>
+<p  class="card-text"> &#8377;<%= mylist.price ? Number(mylist.price).toLocaleString("en-IN") : "0" %>/night    <br><%=mylist.location %> </p>
+    <p  class="card-text"><%=mylist.country %>
 </p>
 
   </div>
