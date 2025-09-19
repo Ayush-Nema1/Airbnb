@@ -1,5 +1,5 @@
 <% layout("/layouts/boilerplate")%>
-<div class="row mt-3">
+<div class="row mt-3 offset-1">
     <div class="col-8 offset-2">
      <h3><%= mylist.title %></h3>
       </div>
@@ -7,7 +7,7 @@
   <img src="<%= mylist.image ? mylist.image.url : '' %>" class="card-img-top show-img" alt="..." >
 
   <div class="card-body">
-    <p class="card-text"> Owner:<%= mylist.owner.username %> </p>
+    <p class="card-text"> Owned by <i> <%= mylist.owner.username %> </i> </p>
     <p class="card-text"> <%=mylist.description%> </p>
    
 <p  class="card-text"> &#8377;<%= mylist.price ? Number(mylist.price).toLocaleString("en-IN") : "0" %>/night    <br><%=mylist.location %> </p>
@@ -16,18 +16,21 @@
 
   </div>
   <br><br>
+  <% if ( currUser && currUser._id.equals(mylist.owner._id)){ %>
   <div class="btns">
         <form method ="get" action="/listings/<%= mylist._id%>/edit"><button class="btn btn-dark  offset-1 ">Edit</button></form>
         
         
         <form method ="post" action="/listings/<%= mylist._id%>?_method=DELETE"><button class="btn btn-danger offset-5">Delete</button></form>
         </div>
-   
+   <% } %>
 
 </div>
 
+
 <div class = "col-8 offset-2 mb-3" >
   <hr>
+  <%if(currUser){%>
 <h4>Leave a Review</h4>
 <form action="/listings/<%=mylist.id%>/reviews" 
   method="post" 
@@ -45,6 +48,7 @@
   <button class = "btn btn-outline-dark">Submit</button>
 </form>
 <hr>
+<% } %>
 <h4>All Reviews</h4>
 
 
@@ -53,7 +57,7 @@
   <%for(let review of mylist.reviews) {%>
     <div class="card col-5 mb-3 ms-3">
       <div class="card-body">
-        <h5 class = "card-title">Jane Do</h5>
+        <h5 class = "card-title"><%= review.author.username %></h5>
         <p class = "card-text"><%=review.comment%></p>
          <p class="card-text"><%=review.rating %> stars</p> 
       </div>
