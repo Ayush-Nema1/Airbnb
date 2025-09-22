@@ -26,8 +26,12 @@ res.render("listings/show.ejs",{mylist});
 };
 
 module.exports.createListing = async (req,res)=>{
+  let url = req.file.path;
+  let filename = req.file.filename;
+ console.log(filename,url);
   const newlisting= new Listing(req.body.listing);
   newlisting.owner = req.user._id;
+  newlisting.image = {filename,url};
   await newlisting.save();
   req.flash("success","New listing addded");
   console.log(newlisting);
@@ -49,8 +53,15 @@ module.exports.renderEditform = async(req,res)=>{
 module.exports.updateListing = async(req,res)=>{
 let {id} = req.params;
 
-await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    req.flash("success"," listing UPDATED");
+
+let listing = await Listing.findByIdAndUpdate(id,{...req.body.listing});
+if(typeof req.file !== "undefined"){
+let url = req.file.path;
+let filename = req.file.filename;
+listing.image = {url,filename};
+await listing.save();
+}
+req.flash("success"," listing UPDATED");
 res.redirect("/listings");
 };
 

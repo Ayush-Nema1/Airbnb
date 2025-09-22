@@ -6,7 +6,6 @@ const Review = require("../models/reviews.js");
 const Listing = require("../models/listing.js");
 const { merge } = require("./listing.js");
 const {validateReview, isLoggedIn, isReviewAuthor} = require("../middleware.js");
-
 const reviewController = require("../controller/reviews.js");
  
 //Review route

@@ -4,7 +4,7 @@
 <div class="col-8 offset-2" >
     <br><br>
         <h2>Edit Data</h2>
-        <form method="post" action="/listings/<%=listing._id%>?_method=PUT" class="needs-validation" novalidate>
+        <form method="post" action="/listings/<%=listing._id%>?_method=PUT" class="needs-validation" novalidate enctype="multipart/form-data">
 
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
@@ -22,9 +22,9 @@
             </div>
           <div class="mb-3">
   <label for="imageUrl" class="form-label">Image URL</label>
-  <input name="listing[image][url]" 
-         value="<%= listing.image ? listing.image.url : '' %>" 
-         class="form-control" type="text" required>
+  <input name="listing[image]" 
+         
+         class="form-control" type="file" required>
          <div class="invalid-feedback">
         Please enter valid image url.
       </div>
