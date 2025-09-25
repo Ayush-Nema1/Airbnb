@@ -1,8 +1,25 @@
 const Listing = require("../models/listing");
 
+
+
+module.exports.searchListings = async(req,res)=>{
+  const {name} = req.query;
+  const alllist = await Listing.find({
+    title : { $regex: name, $options: "i"}
+  });
+  res.render("listings/index.ejs",{alllist});
+};
+
 module.exports.index = async(req,res)=>{
   const alllist =  await Listing.find({});
     res.render("listings/index.ejs",{alllist});
+};
+
+
+module.exports.categorywisepage =  async (req, res) => {
+  const { category } = req.params;
+  const alllist = await Listing.find({ category: category.toUpperCase() });
+  res.render("listings/index", { alllist, category });
 };
 
 module.exports.renderNewForm =  (req,res)=>{

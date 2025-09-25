@@ -11,10 +11,15 @@ body{
 /* navbar */
 .navbar{
     height: 5rem;
-    background-color: white;
-    
+    background-color: white !important;
+    z-index: 100 !important;
 
 }
+.container-fluid{
+    background-color: white;
+    z-index: 12000;
+}
+
 .fa-compass{
     color: #fe424d;
     font-size: 2rem;

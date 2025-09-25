@@ -17,12 +17,13 @@ router.route("/")
   wrapAsyn(listingController.createListing )
 );
 
+router.get("/search",listingController.searchListings);
 //New
 router.get("/new",
    isLoggedIn,
     listingController.renderNewForm
   );
-
+router.get("/category/:category",listingController.categorywisepage);
 //show
 router.route("/:id")
 .get(wrapAsyn(listingController.show))

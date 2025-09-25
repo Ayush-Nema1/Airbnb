@@ -5,6 +5,13 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    z-index: 1;
+    
+  }
+  #filters a{
+    text-decoration: none;
+    color: black;
+     opacity: 0.72;
   }
   .filter{
     text-align: center;
@@ -32,56 +39,88 @@
         display: flex;
         align-items: center;
   }
+  @media (max-width: 992px) {
+  .tax {
+    display: none !important;
+  }
+}
+
 </style>
 
 
     <!-- <h1>All listing</h1> -->
-     <div id = "filters">
-      <div class="filter">
-       <div> <i class="fa-solid fa-fire"></i></div>
-       <p> Trending </p>
-      </div>
-       <div class="filter">
-       <div> <i class="fa-solid fa-bed"></i></div>
-       <p> Rooms </p>
-      </div>
-      <div class="filter">
-       <div> <i class="fa-solid fa-mountain-city"></i></div>
-       <p> Iconic Cities  </p>
-      </div>
-      <div class="filter">
-       <div> <i class="fa-solid fa-mountain"></i></div>
-       <p> Mountain</p>
-      </div>
-      <div class="filter">
-       <div> <i class="fa-brands fa-fort-awesome"></i></div>
-       <p> Castles </p>
-      </div>
-      <div class="filter">
-       <div> <i class="fa-solid fa-person-swimming"></i></div>
-       <p> Amazing pools </p>
-      </div>
-      <div class="filter">
-       <div> <i class="fa-solid fa-tractor"></i></div>
-       <p> Farms </p>
-      </div>
-      <div class="filter">
-       <div> <i class="fa-solid fa-tents"></i></div>
-       <p> Camping </p>
-      </div>
-           <div class="filter">
-       <div><i class="fa-solid fa-snowflake"></i></div>
-       <p> Arctic </p>
-      </div>
+     <div id="filters">
+  <a href="/listings">
+    <div class="filter">
+      <div><i class="fa-solid fa-fire"></i></div>
+      <p>Trending</p>
+    </div>
+  </a>
 
-      <div class="tax">
-       <div class="form-check form-switch form-check-reverse">
-  <input class="form-check-input" type="checkbox" id="switchCheckReverse">
-  <label class="form-check-label" for="switchCheckReverse">Display price after tax
-     </label>
+  <a href="/listings">
+    <div class="filter">
+      <div><i class="fa-solid fa-bed"></i></div>
+      <p>Rooms</p>
+    </div>
+  </a>
+
+  <a href="/listings/category/ICONIC_CITIES">
+    <div class="filter">
+      <div><i class="fa-solid fa-mountain-city"></i></div>
+      <p>Iconic Cities</p>
+    </div>
+  </a>
+
+  <a href="/listings/category/MOUNTAIN">
+    <div class="filter">
+      <div><i class="fa-solid fa-mountain"></i></div>
+      <p>Mountain</p>
+    </div>
+  </a>
+
+  <a href="/listings/category/CASTLES">
+    <div class="filter">
+      <div><i class="fa-brands fa-fort-awesome"></i></div>
+      <p>Castles</p>
+    </div>
+  </a>
+
+  <a href="/listings/category/AMAZING_POOLS">
+    <div class="filter">
+      <div><i class="fa-solid fa-person-swimming"></i></div>
+      <p>Amazing pools</p>
+    </div>
+  </a>
+
+  <a href="/listings/category/FARMS">
+    <div class="filter">
+      <div><i class="fa-solid fa-tractor"></i></div>
+      <p>Farms</p>
+    </div>
+  </a>
+
+  <a href="/listings/category/CAMPING">
+    <div class="filter">
+      <div><i class="fa-solid fa-tents"></i></div>
+      <p>Camping</p>
+    </div>
+  </a>
+
+  <a href="/listings/category/ARCTIC">
+    <div class="filter">
+      <div><i class="fa-solid fa-snowflake"></i></div>
+      <p>Arctic</p>
+    </div>
+  </a>
+
+  <div class="tax">
+    <div class="form-check form-switch form-check-reverse">
+      <input class="form-check-input" type="checkbox" id="switchCheckReverse">
+      <label class="form-check-label" for="switchCheckReverse">Display price after tax</label>
+    </div>
+  </div>
 </div>
-      </div>
-     </div>
+
     <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 ">
   <% for(let l of alllist) { %>
        <a href="/listings/<%=l._id%>" class="l-link">

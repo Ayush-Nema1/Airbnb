@@ -24,16 +24,32 @@
         <input name= "listing[image]"class="form-control" type="file" required>
         <div class="invalid-feedback">
         Please upload valid image .
-      </div>
+        </div>
         </div>
          
+       <div class="select mb-3">
+  <label for="Category" class="form-label">Category</label>
+  <select class="form-select" id="Category" name="listing[category]">
+    <option selected>Select type</option>
+    <option value="TRENDING">Trending</option>
+    <option value="ROOMS">Rooms</option>
+    <option value="ICONIC_CITIES">Iconic Cities</option>
+    <option value="MOUNTAIN">Mountain</option>
+    <option value="CASTLES">Castles</option>
+    <option value="AMAZING_POOLS">Amazing pools</option>
+    <option value="FARMS">Farms</option>
+    <option value="CAMPING">Camping</option>
+    <option value="ARCTIC">Arctic</option>
+  </select>
+</div>
+
         <div class="row">
         <div class="mb-3 col-md-4" >
         <label for="Price"  class="form-label">Price: </label>   
         <input name = "listing[price]" class="form-control"  required>
         <div class="invalid-feedback">
-        Please enter valid price
-      </div>
+          Please enter valid price
+        </div>
         </div>
 
         <div class="mb-3 col-md-4">
@@ -41,7 +57,7 @@
         <input name ="listing[location]" class="form-control" type="text" required>
         <div class="invalid-feedback">
         Please enter valid location.
-      </div>
+         </div>
         </div>
         </div>
 
@@ -55,6 +71,7 @@
         
         <br><br>
         <button class="btn btn-dark add-btn" >Create</button>
+        <br><br>
     </form>
 </div>
 </div>
